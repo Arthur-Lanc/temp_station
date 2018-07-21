@@ -1,0 +1,26 @@
+{
+"configs" : [
+  {
+"server" : "104.224.140.130",
+"server_port" : 8080,
+"password" : "KIfuwlZvGk",
+"method" : "aes-256-cfb",
+"remarks" : "helloworld"}
+,
+  {
+"server" : "67.218.139.39",
+"server_port" : 8088,
+"password" : "ODMyYjFhZG",
+"method" : "aes-256-cfb",
+"remarks" : "ilovescience"}
+
+],
+"strategy" : null,
+"index" : 1,
+"global" : true,
+"enabled" : true,
+"shareOverLan" : true,
+"isDefault" : false,
+"localPort" : 8080,
+"pacUrl" : null,
+"useOnlinePac" : false}

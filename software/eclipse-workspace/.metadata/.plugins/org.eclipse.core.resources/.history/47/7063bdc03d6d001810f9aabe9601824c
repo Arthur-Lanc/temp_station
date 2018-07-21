@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+
+//import edu.princeton.cs.algs4.StdRandom;
+//import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
+public class Percolation {
+	private WeightedQuickUnionUF wquuf;
+	private int rowGridNum;
+	private ArrayList<Integer> arrli;
+	
+   public Percolation(int n) {
+	   wquuf = new WeightedQuickUnionUF(n*n+2);
+	   rowGridNum = n;
+	   arrli = new ArrayList<Integer>(n*n+2);
+       for (int i=1; i<=n*n+2; i++) {
+           arrli.add(0);
+       }
+       arrli.set(n*n,1);
+       arrli.set(n*n+1,1);
+   }
+   
+   public void open(int row, int col) {
+	   if (!isOpen(row,col)){
+		   int curr = (row-1)*rowGridNum+col-1;
+		   arrli.set(curr,1);
+		   int a = (row-2)*rowGridNum+col-1;
+		   int b= (row)*rowGridNum+col-1;
+		   int c = (row-1)*rowGridNum+col-2;
+		   int d= (row-1)*rowGridNum+col;
+		   if (a >= 0 && a <= rowGridNum*rowGridNum-1 && arrli.get(a) == 1){
+			   wquuf.union(a, curr);
+		   }
+		   if (b >= 0 && b <= rowGridNum*rowGridNum-1 && arrli.get(b) == 1){
+			   wquuf.union(b, curr);
+		   }
+		   if (c >= 0 && c <= rowGridNum*rowGridNum-1 && arrli.get(c) == 1){
+			   wquuf.union(c, curr);
+		   }
+		   if (d >= 0 && d <= rowGridNum*rowGridNum-1 && arrli.get(d) == 1){
+			   wquuf.union(d, curr);
+		   }
+	   }
+   }
+   
+   public boolean isOpen(int row, int col) {
+	   if (arrli.get((row-1)*rowGridNum+col-1) == 1){
+		   return true;
+	   }
+	   else {
+		   return false;
+	   }
+   }
+   
+//   public boolean isFull(int row, int col)  // is site (row, col) full?
+//   public     int numberOfOpenSites()       // number of open sites
+//   public boolean percolates()              // does the system percolate?
+//
+   
+   public static void main(String[] args) {
+	   System.out.println("start");
+	   Percolation pcl = new Percolation(20);
+	   System.out.println(pcl.arrli);
+	   System.out.println(pcl.arrli.size());
+	   System.out.println("end");
+   }
+}

@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+
+public class PercolationStats {
+	private int n;
+	private int trials;
+	private Percolation pcl;
+	private double[] arrli;
+	
+   public PercolationStats(int n, int trials) {
+       for (int i=0; i<trials; i++) {
+           arrli.add(0.0);
+       }
+	   this.n = n;
+	   this.trials = trials;
+	   
+	   for (int i=0; i<trials; i++) {
+		   pcl = new Percolation(n);
+		   while(true) {
+			   int row = StdRandom.uniform(1,n+1);
+			   int col = StdRandom.uniform(1,n+1);
+			   pcl.open(row, col);
+			   if (pcl.percolates()){
+				   break;
+			   }
+		   }
+		   double x = ((double)pcl.numberOfOpenSites())/(n*n);
+		   arrli.set(i, x);
+	   }
+   }
+   
+   public double mean() {
+	   return StdStats.mean(arrli);
+   }
+   
+//   public double stddev()                        // sample standard deviation of percolation threshold
+//   public double confidenceLo()                  // low  endpoint of 95% confidence interval
+//   public double confidenceHi()                  // high endpoint of 95% confidence interval
+//
+//   public static void main(String[] args)        // test client (described below)
+}
